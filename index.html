@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="en-IN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Demo of a fictional resort: keep it out of search results -->
+  <meta name="robots" content="noindex, nofollow">
+  <title>Misty Hills Resort, Yercaud | Demo Website by Raymelz</title>
+  <meta name="description" content="Demo resort website by Raymelz: valley-view cottages, campfire nights and coffee-estate walks in Yercaud, with room booking requests, packages, gallery and directions.">
+  <meta property="og:title" content="Misty Hills Resort, Yercaud (Demo by Raymelz)">
+  <meta property="og:description" content="See how a resort website can bring direct bookings: rooms, packages, gallery and a booking request form.">
+  <meta property="og:image" content="https://raymelz75.github.io/resort-demo/images/og.jpg">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#1f4d3a">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --green: #1f4d3a; --green-2: #2f6b4f; --mist: #eef3ef; --cream: #faf6ef; --wood: #8a5a2b; --gold: #c8a24a; --ink: #1c2620; --muted: #5f6b64; --line: #e2e8e3; --radius: 16px; }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; font-family: "Inter", system-ui, sans-serif; color: var(--ink); background: var(--cream); line-height: 1.6; padding-bottom: 54px; }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; }
+    h1, h2, h3 { font-family: "Playfair Display", Georgia, serif; line-height: 1.15; margin: 0 0 .4em; }
+    h2 { font-size: clamp(1.9rem, 4vw, 2.6rem); color: var(--green); }
+    .container { width: min(1160px, 100% - 40px); margin: 0 auto; }
+    .section { padding: 90px 0; }
+    .alt { background: var(--mist); }
+    .eyebrow { display: inline-block; font-size: .78rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--wood); margin-bottom: 10px; }
+    .head { max-width: 680px; margin: 0 auto 46px; text-align: center; }
+    .head p { color: var(--muted); font-size: 1.05rem; margin: 0; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 24px; border-radius: 999px; border: 0; font: 600 .98rem "Inter", sans-serif; cursor: pointer; text-decoration: none; transition: transform .2s, background .2s; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-gold { background: var(--gold); color: #1c2620; }
+    .btn-green { background: var(--green); color: #fff; }
+    .btn-outline { background: transparent; border: 1.5px solid var(--green); color: var(--green); }
+
+    /* Header */
+    .site-header { position: fixed; inset: 0 0 auto; z-index: 50; transition: background .3s, box-shadow .3s; }
+    .site-header.solid { background: rgba(250, 246, 239, .96); box-shadow: 0 4px 20px rgba(0, 0, 0, .08); backdrop-filter: blur(8px); }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #fff; }
+    .solid .logo { color: var(--green); }
+    .logo svg { width: 38px; height: 38px; }
+    .logo b { display: block; font: 700 1.25rem "Playfair Display", serif; line-height: 1; }
+    .logo small { display: block; font-size: .64rem; letter-spacing: .22em; text-transform: uppercase; opacity: .85; }
+    .menu { display: flex; align-items: center; gap: 26px; list-style: none; margin: 0; padding: 0; }
+    .menu a { color: #fff; text-decoration: none; font-weight: 500; font-size: .95rem; }
+    .solid .menu a { color: var(--ink); }
+    .menu .btn { color: #1c2620; padding: 10px 20px; }
+    .burger { display: none; background: none; border: 0; color: #fff; padding: 8px; cursor: pointer; }
+    .solid .burger { color: var(--green); }
+
+    /* Hero */
+    .hero { position: relative; min-height: 100vh; display: flex; align-items: center; color: #fff; overflow: hidden; }
+    .hero video, .hero .poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10, 30, 20, .55) 0%, rgba(10, 30, 20, .25) 45%, rgba(10, 30, 20, .7) 100%); }
+    .hero .container { position: relative; z-index: 1; padding: 120px 0 60px; }
+    .hero .eyebrow { color: #f4dfa6; }
+    .hero h1 { font-size: clamp(2.6rem, 7vw, 4.8rem); max-width: 760px; text-shadow: 0 4px 30px rgba(0, 0, 0, .35); }
+    .hero p.lead { max-width: 600px; font-size: 1.15rem; color: rgba(255, 255, 255, .92); margin: 0 0 30px; }
+    .booking-bar { display: grid; grid-template-columns: repeat(3, 1fr) auto; gap: 10px; background: rgba(255, 255, 255, .96); color: var(--ink); padding: 14px; border-radius: 18px; max-width: 820px; box-shadow: 0 20px 50px rgba(0, 0, 0, .25); }
+    .booking-bar label { display: block; font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+    .booking-bar input, .booking-bar select { width: 100%; border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font: 500 .95rem "Inter", sans-serif; background: #fff; color: var(--ink); }
+    .booking-bar .btn { align-self: end; height: 46px; }
+    .booking-bar > div { min-width: 0; }
+
+    .strip { background: var(--green); color: #fff; }
+    .strip ul { list-style: none; margin: 0; padding: 18px 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 38px; font-weight: 500; }
+
+    /* About */
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+    .split img { border-radius: 22px; box-shadow: 0 24px 60px rgba(0, 0, 0, .15); aspect-ratio: 4 / 3; object-fit: cover; }
+    .split p { color: var(--muted); }
+    .facts { display: flex; gap: 30px; margin-top: 24px; }
+    .facts b { display: block; font: 700 1.8rem "Playfair Display", serif; color: var(--green); }
+    .facts span { font-size: .9rem; color: var(--muted); }
+
+    /* Cards */
+    .grid { display: grid; gap: 26px; }
+    .g3 { grid-template-columns: repeat(3, 1fr); }
+    .card { background: #fff; border-radius: var(--radius); overflow: hidden; box-shadow: 0 10px 30px rgba(31, 77, 58, .08); display: flex; flex-direction: column; }
+    .card .ph { overflow: hidden; aspect-ratio: 16 / 10; }
+    .card .ph img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
+    .card:hover .ph img { transform: scale(1.06); }
+    .card .body { padding: 22px 22px 24px; display: flex; flex-direction: column; flex: 1; }
+    .card h3 { font-size: 1.35rem; color: var(--green); }
+    .card p { color: var(--muted); margin: 0 0 14px; font-size: .96rem; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 16px; padding: 0; list-style: none; }
+    .chips li { font-size: .8rem; background: var(--mist); color: var(--green); border-radius: 999px; padding: 4px 10px; font-weight: 600; }
+    .price { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .price b { font-size: 1.35rem; color: var(--ink); }
+    .price small { color: var(--muted); font-weight: 500; }
+
+    .exp .card .ph { aspect-ratio: 4 / 3; }
+
+    /* Packages */
+    .pack { background: #fff; border-radius: var(--radius); padding: 30px; border: 1.5px solid var(--line); position: relative; }
+    .pack.hot { border-color: var(--gold); box-shadow: 0 18px 46px rgba(200, 162, 74, .25); }
+    .pack .tag { position: absolute; top: -13px; left: 24px; background: var(--gold); color: #1c2620; font-size: .74rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 5px 12px; border-radius: 999px; }
+    .pack ul { padding: 0; margin: 14px 0 22px; list-style: none; display: grid; gap: 8px; color: var(--muted); }
+    .pack li::before { content: "✓"; color: var(--green-2); font-weight: 800; margin-right: 8px; }
+    .pack .amt { font: 700 1.9rem "Playfair Display", serif; color: var(--green); }
+    .pack .amt small { font: 500 .9rem "Inter", sans-serif; color: var(--muted); }
+
+    /* Gallery */
+    .gallery { columns: 4 240px; column-gap: 14px; }
+    .gallery button { display: block; width: 100%; margin: 0 0 14px; padding: 0; border: 0; border-radius: 14px; overflow: hidden; cursor: zoom-in; break-inside: avoid; background: none; }
+    .gallery img { width: 100%; transition: transform .5s ease; }
+    .gallery button:hover img { transform: scale(1.05); }
+    .lightbox { position: fixed; inset: 0; z-index: 80; background: rgba(10, 20, 15, .92); display: none; align-items: center; justify-content: center; padding: 20px; }
+    .lightbox.open { display: flex; }
+    .lightbox img { max-height: 86vh; border-radius: 12px; }
+    .lightbox button { position: absolute; top: 18px; right: 22px; background: none; border: 0; color: #fff; font-size: 2.2rem; cursor: pointer; }
+
+    /* Reviews */
+    .review { background: #fff; border-radius: var(--radius); padding: 26px; box-shadow: 0 10px 30px rgba(31, 77, 58, .07); }
+    .review .stars { color: var(--gold); letter-spacing: 2px; }
+    .review p { color: var(--ink); font-style: italic; }
+    .review b { color: var(--green); }
+    .note { text-align: center; color: var(--muted); font-size: .85rem; margin-top: 18px; }
+
+    /* Location */
+    .map { border-radius: 20px; overflow: hidden; box-shadow: 0 20px 50px rgba(0, 0, 0, .12); min-height: 360px; }
+    .map iframe { width: 100%; height: 100%; min-height: 360px; border: 0; display: block; }
+    .routes { list-style: none; padding: 0; margin: 18px 0 0; display: grid; gap: 12px; }
+    .routes li { display: flex; gap: 12px; align-items: flex-start; background: #fff; border-radius: 12px; padding: 12px 14px; border: 1px solid var(--line); }
+    .routes b { color: var(--green); }
+
+    /* FAQ */
+    .faq { max-width: 780px; margin: 0 auto; }
+    .faq details { background: #fff; border: 1px solid var(--line); border-radius: 12px; margin-bottom: 12px; }
+    .faq summary { cursor: pointer; padding: 16px 20px; font-weight: 600; list-style: none; position: relative; padding-right: 48px; }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::after { content: "+"; position: absolute; right: 20px; top: 12px; font-size: 1.4rem; color: var(--green); }
+    .faq details[open] summary::after { content: "−"; }
+    .faq details p { margin: 0; padding: 0 20px 16px; color: var(--muted); }
+
+    /* Booking form */
+    .book { background: linear-gradient(135deg, var(--green), #173a2c); color: #fff; }
+    .book h2 { color: #fff; }
+    .book .head p { color: rgba(255, 255, 255, .85); }
+    form.request { max-width: 820px; margin: 0 auto; background: #fff; color: var(--ink); border-radius: 22px; padding: 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; box-shadow: 0 30px 70px rgba(0, 0, 0, .3); }
+    form.request label { font-size: .82rem; font-weight: 600; color: var(--muted); display: block; margin-bottom: 5px; }
+    form.request input, form.request select, form.request textarea { width: 100%; border: 1px solid var(--line); border-radius: 10px; padding: 11px 12px; font: 500 .96rem "Inter", sans-serif; color: var(--ink); background: #fbfcfb; }
+    form.request .full { grid-column: 1 / -1; }
+    form.request .btn { justify-content: center; width: 100%; height: 50px; font-size: 1.02rem; }
+    .done { display: none; max-width: 820px; margin: 0 auto; background: #fff; color: var(--ink); border-radius: 22px; padding: 34px; text-align: center; }
+    .done.show { display: block; }
+    .done h3 { color: var(--green); font-size: 1.6rem; }
+
+    footer { background: #13281f; color: rgba(255, 255, 255, .75); padding: 40px 0; text-align: center; font-size: .92rem; }
+    footer a { color: #f4dfa6; }
+
+    /* Demo bar + floating enquiry */
+    .demo-bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; background: #0a4fd6; color: #fff; display: flex; align-items: center; justify-content: center; gap: 12px; padding: 10px 46px 10px 16px; font-size: .92rem; text-align: center; }
+    .demo-bar a { color: #ffd166; font-weight: 700; white-space: nowrap; }
+    .demo-bar button { position: absolute; right: 12px; background: none; border: 0; color: #fff; font-size: 1.3rem; cursor: pointer; }
+    .demo-bar .short { display: none; }
+    @media (max-width: 600px) { .demo-bar .long { display: none; } .demo-bar .short { display: inline; } }
+    .float-chat { position: fixed; right: 18px; bottom: 72px; z-index: 55; width: 56px; height: 56px; border-radius: 50%; background: #22c55e; color: #fff; display: grid; place-items: center; box-shadow: 0 10px 26px rgba(0, 0, 0, .25); }
+    .float-chat svg { width: 28px; height: 28px; }
+
+    .reveal { opacity: 0; transform: translateY(26px); transition: opacity .8s ease, transform .8s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+
+    @media (max-width: 900px) {
+      .g3 { grid-template-columns: 1fr; }
+      .split { grid-template-columns: 1fr; gap: 30px; }
+      .booking-bar { grid-template-columns: 1fr 1fr; }
+      .booking-bar .btn { grid-column: 1 / -1; }
+      .menu { position: fixed; inset: 72px 0 auto; background: var(--cream); flex-direction: column; padding: 20px; gap: 18px; display: none; box-shadow: 0 20px 40px rgba(0, 0, 0, .12); }
+      .menu.open { display: flex; }
+      .menu a { color: var(--ink); }
+      .burger { display: block; }
+      form.request { grid-template-columns: 1fr; padding: 22px; }
+      .section { padding: 70px 0; }
+      .facts { gap: 20px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .hero video { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header" id="header">
+    <div class="container nav">
+      <a href="#top" class="logo" aria-label="Misty Hills Resort home">
+        <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="19" fill="#c8a24a"/><path d="M6 28l8-11 6 7 5-6 9 10z" fill="#1f4d3a"/><path d="M8 22c4-2 8-2 12 0s8 2 12 0" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" opacity=".8"/></svg>
+        <span><b>Misty Hills</b><small>Resort · Yercaud</small></span>
+      </a>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+      <ul class="menu" id="menu">
+        <li><a href="#rooms">Rooms</a></li>
+        <li><a href="#experiences">Experiences</a></li>
+        <li><a href="#packages">Packages</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#location">Location</a></li>
+        <li><a href="#book" class="btn btn-gold">Book Now</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <img class="poster" src="images/hero.webp" alt="" aria-hidden="true">
+      <video autoplay muted loop playsinline poster="images/hero.webp" aria-hidden="true"><source src="video/hero.mp4" type="video/mp4"></video>
+      <div class="container">
+        <span class="eyebrow">Yercaud · Shevaroy Hills · 1,515 m</span>
+        <h1>Wake up above the clouds in Yercaud</h1>
+        <p class="lead">Valley-view cottages, coffee-estate walks and campfire nights, just 30 km up the ghat road from Salem.</p>
+        <form class="booking-bar" id="quickBook">
+          <div><label for="qIn">Check-in</label><input type="date" id="qIn" required></div>
+          <div><label for="qOut">Check-out</label><input type="date" id="qOut" required></div>
+          <div><label for="qGuests">Guests</label>
+            <select id="qGuests"><option>1 adult</option><option selected>2 adults</option><option>2 adults + 1 child</option><option>2 adults + 2 children</option><option>Group (5+)</option></select></div>
+          <button class="btn btn-gold" type="submit">Check Availability</button>
+        </form>
+      </div>
+    </section>
+
+    <div class="strip"><ul><li>🌿 Coffee-estate views</li><li>🔥 Campfire every evening</li><li>🍳 Breakfast included</li><li>🚗 Free parking</li><li>📶 Wi-Fi in all rooms</li></ul></div>
+
+    <section class="section">
+      <div class="container split">
+        <img class="reveal" src="images/tea-estate.webp" alt="Mist rolling over the coffee and tea estate around Misty Hills Resort" width="1200" height="675" loading="lazy">
+        <div class="reveal">
+          <span class="eyebrow">Welcome</span>
+          <h2>A quiet estate retreat in the Shevaroys</h2>
+          <p>Misty Hills is a small family-run resort set inside a coffee and pepper estate, a few minutes from Yercaud Lake. Mornings start with mist over the valley and fresh estate coffee; evenings end around the campfire under a sky full of stars.</p>
+          <p>Whether it's a honeymoon, a family weekend or a team offsite, we keep things simple, warm and personal.</p>
+          <div class="facts"><div><b>12</b><span>Cottages &amp; rooms</span></div><div><b>5 km</b><span>To Yercaud Lake</span></div><div><b>24/7</b><span>Hot water &amp; power backup</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="rooms">
+      <div class="container">
+        <div class="head reveal"><span class="eyebrow">Stay</span><h2>Rooms &amp; cottages</h2><p>Every room comes with breakfast, hot water, Wi-Fi and a view of the hills.</p></div>
+        <div class="grid g3">
+          <article class="card reveal">
+            <div class="ph"><img src="images/room-cottage.webp" alt="Bright valley-view cottage with a large bed and a glass door to the terrace" width="1200" height="675" loading="lazy"></div>
+            <div class="body"><h3>Valley View Cottage</h3><p>A bright private cottage with a sit-out facing the valley. Perfect for couples.</p>
+              <ul class="chips"><li>2 guests</li><li>King bed</li><li>Private sit-out</li></ul>
+              <div class="price"><b>₹3,499 <small>/ night</small></b><button class="btn btn-green" data-room="Valley View Cottage">Request</button></div></div>
+          </article>
+          <article class="card reveal">
+            <div class="ph"><img src="images/room-deluxe.webp" alt="Deluxe room with a balcony overlooking the hills" width="1200" height="675" loading="lazy"></div>
+            <div class="body"><h3>Deluxe Balcony Room</h3><p>A spacious room with a private balcony to watch the mist roll in every morning.</p>
+              <ul class="chips"><li>3 guests</li><li>Balcony</li><li>Work desk</li></ul>
+              <div class="price"><b>₹4,499 <small>/ night</small></b><button class="btn btn-green" data-room="Deluxe Balcony Room">Request</button></div></div>
+          </article>
+          <article class="card reveal">
+            <div class="ph"><img src="images/room-family.webp" alt="Family suite with a large bed and a breakfast table" width="1200" height="675" loading="lazy"></div>
+            <div class="body"><h3>Family Suite</h3><p>Two connected spaces with room for the kids, plus breakfast served in your suite.</p>
+              <ul class="chips"><li>4–5 guests</li><li>2 beds</li><li>In-room breakfast</li></ul>
+              <div class="price"><b>₹6,499 <small>/ night</small></b><button class="btn btn-green" data-room="Family Suite">Request</button></div></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section exp" id="experiences">
+      <div class="container">
+        <div class="head reveal"><span class="eyebrow">Experiences</span><h2>Things to do at Misty Hills</h2><p>Slow mornings, green walks and warm evenings: the best of Yercaud, right outside your room.</p></div>
+        <div class="grid g3">
+          <article class="card reveal"><div class="ph"><img src="images/exp-campfire.webp" alt="Campfire burning at night in front of a tent" width="1200" height="675" loading="lazy"></div><div class="body"><h3>Campfire nights</h3><p>Music, stories and hot snacks around the fire, every evening.</p></div></article>
+          <article class="card reveal"><div class="ph"><img src="images/exp-tea.webp" alt="Fresh estate coffee being poured into a cup" width="1200" height="675" loading="lazy"></div><div class="body"><h3>Estate coffee &amp; tea</h3><p>Taste coffee grown on our own estate, with a short plantation walk.</p></div></article>
+          <article class="card reveal"><div class="ph"><img src="images/exp-walk.webp" alt="Quiet road through a dense green forest" width="1200" height="675" loading="lazy"></div><div class="body"><h3>Nature walks</h3><p>Guided morning walks through forest trails and the Shevaroy viewpoints.</p></div></article>
+          <article class="card reveal"><div class="ph"><img src="images/exp-lake.webp" alt="Boat crossing a calm lake at sunrise" width="1200" height="675" loading="lazy"></div><div class="body"><h3>Yercaud Lake boating</h3><p>Just 5 km away. We arrange the cab and the timings for you.</p></div></article>
+          <article class="card reveal"><div class="ph"><img src="images/exp-falls.webp" alt="Waterfall flowing down green hills" width="960" height="720" loading="lazy"></div><div class="body"><h3>Killiyur Falls trip</h3><p>A short drive and trek to the falls, best after the monsoon.</p></div></article>
+          <article class="card reveal"><div class="ph"><img src="images/exp-family.webp" alt="Family roasting marshmallows over a fire" width="1200" height="675" loading="lazy"></div><div class="body"><h3>Family time</h3><p>Board games, a small play area and marshmallows by the fire for the kids.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="packages">
+      <div class="container">
+        <div class="head reveal"><span class="eyebrow">Packages</span><h2>Stay packages</h2><p>Everything planned, so you can simply arrive and relax.</p></div>
+        <div class="grid g3">
+          <div class="pack reveal"><h3>Honeymoon Escape</h3><div class="amt">₹11,999 <small>/ couple · 2 nights</small></div>
+            <ul><li>Valley View Cottage</li><li>Room decoration &amp; cake</li><li>Candlelight dinner</li><li>Private campfire</li></ul>
+            <button class="btn btn-outline" data-room="Honeymoon Escape (package)">Request Package</button></div>
+          <div class="pack hot reveal"><span class="tag">Most popular</span><h3>Family Weekend</h3><div class="amt">₹15,999 <small>/ family · 2 nights</small></div>
+            <ul><li>Family Suite for 2 adults + 2 kids</li><li>All meals included</li><li>Yercaud sightseeing cab</li><li>Campfire &amp; games</li></ul>
+            <button class="btn btn-green" data-room="Family Weekend (package)">Request Package</button></div>
+          <div class="pack reveal"><h3>Team Offsite</h3><div class="amt">Custom <small>/ for 10–40 people</small></div>
+            <ul><li>Meeting space with projector</li><li>Team activities &amp; trek</li><li>Group dining</li><li>Bonfire evening</li></ul>
+            <button class="btn btn-outline" data-room="Team Offsite (package)">Get a Quote</button></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="gallery">
+      <div class="container">
+        <div class="head reveal"><span class="eyebrow">Gallery</span><h2>Moments at Misty Hills</h2></div>
+        <div class="gallery reveal" id="gallery-grid">
+          <button><img src="images/g-sunrise.webp" alt="Sunrise above a sea of clouds" loading="lazy"></button>
+          <button><img src="images/g-balcony.webp" alt="Balcony with chairs and a table" loading="lazy"></button>
+          <button><img src="images/g-valley.webp" alt="Green valley and misty mountains" loading="lazy"></button>
+          <button><img src="images/g-breakfast.webp" alt="Breakfast with fruit, croissant and coffee" loading="lazy"></button>
+          <button><img src="images/g-campfire.webp" alt="Pouring a warm drink by the campfire" loading="lazy"></button>
+          <button><img src="images/g-room.webp" alt="Bright room with a garden view" loading="lazy"></button>
+          <button><img src="images/g-lake.webp" alt="Calm lake with a wooden deck" loading="lazy"></button>
+          <button><img src="images/g-window.webp" alt="Cosy bed beside a large window" loading="lazy"></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt">
+      <div class="container">
+        <div class="head reveal"><span class="eyebrow">Guests</span><h2>What guests say</h2></div>
+        <div class="grid g3">
+          <div class="review reveal"><div class="stars">★★★★★</div><p>“The mist outside our cottage every morning was magical. Campfire nights were the highlight of our honeymoon.”</p><b>Priya &amp; Karthik, Chennai</b></div>
+          <div class="review reveal"><div class="stars">★★★★★</div><p>“Perfect weekend getaway from Bengaluru. Clean rooms, great breakfast and very friendly staff.”</p><b>Arun, Bengaluru</b></div>
+          <div class="review reveal"><div class="stars">★★★★★</div><p>“Our kids loved the marshmallows and the play area. We'll be back in summer.”</p><b>The Raman family, Salem</b></div>
+        </div>
+        <p class="note">Sample reviews for this demo website.</p>
+      </div>
+    </section>
+
+    <section class="section" id="location">
+      <div class="container split">
+        <div class="reveal">
+          <span class="eyebrow">Location</span>
+          <h2>How to reach us</h2>
+          <p>Misty Hills is in Yercaud, in the Shevaroy Hills above Salem, Tamil Nadu.</p>
+          <ul class="routes">
+            <li>🚗 <span><b>From Salem:</b> about 30 km, around 1 hour up the ghat road with 20 hairpin bends</span></li>
+            <li>🛣️ <span><b>From Bengaluru:</b> about 230 km, around 5 hours</span></li>
+            <li>🛣️ <span><b>From Chennai:</b> about 360 km, around 7 hours</span></li>
+            <li>🚆 <span><b>Nearest railway station:</b> Salem Junction</span></li>
+          </ul>
+        </div>
+        <div class="map reveal"><iframe src="https://maps.google.com/maps?q=Yercaud%20Lake&amp;z=13&amp;output=embed" loading="lazy" title="Map of Yercaud" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+      </div>
+    </section>
+
+    <section class="section alt">
+      <div class="container">
+        <div class="head reveal"><span class="eyebrow">FAQ</span><h2>Good to know</h2></div>
+        <div class="faq reveal">
+          <details open><summary>What are the check-in and check-out times?</summary><p>Check-in is from 12 noon and check-out is by 11 AM. Early check-in is possible on request.</p></details>
+          <details><summary>Is breakfast included?</summary><p>Yes. A South Indian and continental breakfast is included with every room.</p></details>
+          <details><summary>Is there parking at the resort?</summary><p>Yes, free parking is available for cars and bikes inside the property.</p></details>
+          <details><summary>Are pets allowed?</summary><p>Pets are welcome in the Valley View Cottages. Please tell us when you send your booking request.</p></details>
+          <details><summary>What is the cancellation policy?</summary><p>Free cancellation up to 7 days before check-in. After that, one night's charge applies.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section book" id="book">
+      <div class="container">
+        <div class="head reveal"><span class="eyebrow" style="color:#f4dfa6">Book Direct</span><h2>Request your booking</h2><p>Book directly with us for the best price. We'll confirm availability within a few hours.</p></div>
+        <form class="request" id="requestForm">
+          <div><label for="fName">Your name</label><input id="fName" required autocomplete="name"></div>
+          <div><label for="fPhone">Phone / WhatsApp</label><input id="fPhone" type="tel" required autocomplete="tel" placeholder="+91"></div>
+          <div><label for="fIn">Check-in</label><input id="fIn" type="date" required></div>
+          <div><label for="fOut">Check-out</label><input id="fOut" type="date" required></div>
+          <div><label for="fRoom">Room or package</label>
+            <select id="fRoom"><option>Valley View Cottage</option><option>Deluxe Balcony Room</option><option>Family Suite</option><option>Honeymoon Escape (package)</option><option>Family Weekend (package)</option><option>Team Offsite (package)</option></select></div>
+          <div><label for="fGuests">Guests</label><select id="fGuests"><option>1 adult</option><option selected>2 adults</option><option>2 adults + 1 child</option><option>2 adults + 2 children</option><option>Group (5+)</option></select></div>
+          <div class="full"><label for="fMsg">Anything we should know? (optional)</label><textarea id="fMsg" rows="3" placeholder="Celebrations, food preferences, arrival time…"></textarea></div>
+          <div class="full"><button class="btn btn-gold" type="submit">Send Booking Request</button></div>
+        </form>
+        <div class="done" id="done" role="status">
+          <h3>Thank you! 🌿</h3>
+          <p id="doneText"></p>
+          <p style="color:var(--muted);font-size:.9rem">This is a demo: on a real resort website, this request reaches the owner instantly by email and WhatsApp.</p>
+          <a class="btn btn-green" id="waLink" href="#" target="_blank" rel="noopener">Also send on WhatsApp</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p><b style="color:#fff">Misty Hills Resort</b> · Yercaud, Salem District, Tamil Nadu (demo)</p>
+      <p>© 2026 Misty Hills Resort · Demo website designed by <a href="https://raymelz.com/resort-hotel-website-design/" target="_blank" rel="noopener">Raymelz</a></p>
+    </div>
+  </footer>
+
+  <a class="float-chat" id="floatChat" href="#book" aria-label="Send a booking enquiry">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.6 7.3L3 21l2.2-5.4A8.5 8.5 0 1 1 21 11.5z"/></svg>
+  </a>
+  <div class="demo-bar" id="demoBar">
+    <span class="long">This is a <b>demo website by Raymelz</b>. Want one for your resort?</span>
+    <span class="short"><b>Demo by Raymelz</b></span>
+    <a href="https://raymelz.com/resort-hotel-website-design/" target="_blank" rel="noopener">Get yours from ₹4,999 →</a>
+    <button aria-label="Close" id="closeBar">×</button>
+  </div>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-label="Photo"><button aria-label="Close" id="closeLb">×</button><img alt="" id="lbImg"></div>
+
+  <script>
+  (function () {
+    var header = document.getElementById("header");
+    function onScroll() { header.classList.toggle("solid", window.scrollY > 60); }
+    window.addEventListener("scroll", onScroll, { passive: true }); onScroll();
+
+    // Mobile menu
+    var burger = document.getElementById("burger"), menu = document.getElementById("menu");
+    burger.addEventListener("click", function () { var open = menu.classList.toggle("open"); burger.setAttribute("aria-expanded", open); header.classList.add("solid"); });
+    menu.addEventListener("click", function (e) { if (e.target.tagName === "A") { menu.classList.remove("open"); burger.setAttribute("aria-expanded", "false"); } });
+
+    // Reveal on scroll
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); } });
+    }, { threshold: .15 });
+    document.querySelectorAll(".reveal").forEach(function (el) { io.observe(el); });
+
+    // Dates: today and tomorrow as defaults, never in the past
+    function iso(d) { return d.toISOString().slice(0, 10); }
+    var today = new Date(), tomorrow = new Date(Date.now() + 864e5);
+    ["qIn", "fIn"].forEach(function (id) { var el = document.getElementById(id); el.min = iso(today); el.value = iso(today); });
+    ["qOut", "fOut"].forEach(function (id) { var el = document.getElementById(id); el.min = iso(tomorrow); el.value = iso(tomorrow); });
+
+    // Quick booking bar fills the booking form
+    var form = document.getElementById("requestForm");
+    document.getElementById("quickBook").addEventListener("submit", function (e) {
+      e.preventDefault();
+      document.getElementById("fIn").value = document.getElementById("qIn").value;
+      document.getElementById("fOut").value = document.getElementById("qOut").value;
+      document.getElementById("fGuests").value = document.getElementById("qGuests").value;
+      document.getElementById("book").scrollIntoView();
+    });
+    // Room and package buttons pick the room in the form
+    document.querySelectorAll("[data-room]").forEach(function (b) {
+      b.addEventListener("click", function () { document.getElementById("fRoom").value = b.getAttribute("data-room"); document.getElementById("book").scrollIntoView(); });
+    });
+
+    // Booking request (demo): show a confirmation and a WhatsApp option
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var v = function (id) { return document.getElementById(id).value.trim(); };
+      var msg = "Hi Misty Hills Resort, I'd like to book " + v("fRoom") + " from " + v("fIn") + " to " + v("fOut") + " for " + v("fGuests") + ". Name: " + v("fName") + ", phone: " + v("fPhone") + "." + (v("fMsg") ? " Note: " + v("fMsg") : "");
+      document.getElementById("doneText").textContent = "Thank you, " + v("fName") + ". Your request for the " + v("fRoom") + " from " + v("fIn") + " to " + v("fOut") + " has been sent. We'll call you shortly to confirm.";
+      document.getElementById("waLink").href = "https://wa.me/?text=" + encodeURIComponent(msg);
+      form.style.display = "none";
+      document.getElementById("done").classList.add("show");
+    });
+
+    // Gallery lightbox
+    var lb = document.getElementById("lightbox"), lbImg = document.getElementById("lbImg");
+    document.getElementById("gallery-grid").addEventListener("click", function (e) {
+      var img = e.target.closest("button") && e.target.closest("button").querySelector("img");
+      if (!img) return;
+      lbImg.src = img.src; lbImg.alt = img.alt; lb.classList.add("open");
+    });
+    function closeLb() { lb.classList.remove("open"); }
+    document.getElementById("closeLb").addEventListener("click", closeLb);
+    lb.addEventListener("click", function (e) { if (e.target === lb) closeLb(); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeLb(); });
+
+    // FAQ: one answer open at a time
+    var faq = document.querySelector(".faq");
+    faq.addEventListener("toggle", function (e) { if (e.target.open) faq.querySelectorAll("details[open]").forEach(function (d) { if (d !== e.target) d.open = false; }); }, true);
+
+    // Demo bar
+    document.getElementById("closeBar").addEventListener("click", function () {
+      document.getElementById("demoBar").style.display = "none"; document.body.style.paddingBottom = "0"; document.getElementById("floatChat").style.bottom = "18px";
+    });
+  })();
+  </script>
+</body>
+</html>
